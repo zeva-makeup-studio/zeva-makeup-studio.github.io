@@ -1,5 +1,11 @@
 const modal=document.querySelector('#booking-modal');
 document.querySelectorAll('[data-open-booking]').forEach(button=>button.addEventListener('click',()=>modal.showModal()));
 modal?.addEventListener('click',event=>{if(event.target===modal)modal.close()});
+modal?.querySelector('.close')?.addEventListener('click',event=>{event.preventDefault();modal.close()});
+modal?.querySelector('form')?.addEventListener('submit',event=>{event.preventDefault();const data=new FormData(event.currentTarget);const message=['Hello Zeva! I would like to request an appointment.','Name: '+data.get('name').trim(),'Service: '+data.get('service').trim(),'Preferred date: '+data.get('date'),'Preferred time: '+(data.get('time')||'Flexible'),'Appointment type: '+data.get('type'),'Additional details: '+(data.get('details').trim()||'None')].join('\n');window.location.href='https://wa.me/918353909431?text='+encodeURIComponent(message)});
+window.addEventListener('load',()=>{if(sessionStorage.getItem('zeva-booking-seen')!=='yes'){modal?.showModal();sessionStorage.setItem('zeva-booking-seen','yes')}});
+const modal=document.querySelector('#booking-modal');
+document.querySelectorAll('[data-open-booking]').forEach(button=>button.addEventListener('click',()=>modal.showModal()));
+modal?.addEventListener('click',event=>{if(event.target===modal)modal.close()});
 modal?.querySelector('form')?.addEventListener('submit',event=>{event.preventDefault();const data=new FormData(event.currentTarget);const message=['Hello Zeva! I would like to request an appointment.','Name: '+data.get('name').trim(),'Service: '+data.get('service').trim(),'Preferred date: '+data.get('date'),'Preferred time: '+(data.get('time')||'Flexible'),'Appointment type: '+data.get('type'),'Additional details: '+(data.get('details').trim()||'None')].join('\n');window.location.href='https://wa.me/918353909431?text='+encodeURIComponent(message)});
 window.addEventListener('load',()=>{if(sessionStorage.getItem('zeva-booking-seen')!=='yes'){modal?.showModal();sessionStorage.setItem('zeva-booking-seen','yes')}});
